@@ -3,18 +3,30 @@ const memoryVideo = document.getElementById("memoryVideo");
 const startVideo = document.getElementById("startVideo");
 const skipVideo = document.getElementById("skipVideo");
 
-// تشغيل الفيديو
-startVideo.addEventListener("click", async () => {
-    try {
-        await memoryVideo.play();
+startVideo.addEventListener("click", () => {
 
-        startVideo.style.display = "none";
-        skipVideo.style.display = "block";
+    memoryVideo.style.display = "block";
 
-        console.log("الفيديو اشتغل بنجاح");
-    } catch (error) {
-        console.error("خطأ في تشغيل الفيديو:", error);
-    }
+    memoryVideo.play()
+        .then(() => {
+            startVideo.style.display = "none";
+            skipVideo.style.display = "block";
+
+            console.log("الفيديو اشتغل بنجاح");
+        })
+        .catch((error) => {
+            console.error("خطأ في تشغيل الفيديو:", error);
+        });
+
+});
+
+memoryVideo.addEventListener("ended", () => {
+    introVideo.classList.add("hide");
+});
+
+skipVideo.addEventListener("click", () => {
+    memoryVideo.pause();
+    introVideo.classList.add("hide");
 });
 
 // لما الفيديو يخلص

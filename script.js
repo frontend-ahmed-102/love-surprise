@@ -4,11 +4,17 @@ const startVideo = document.getElementById("startVideo");
 const skipVideo = document.getElementById("skipVideo");
 
 // تشغيل الفيديو
-startVideo.addEventListener("click", () => {
-memoryVideo.play();
+startVideo.addEventListener("click", async () => {
+    try {
+        await memoryVideo.play();
 
-startVideo.style.display = "none";
-skipVideo.style.display = "block";
+        startVideo.style.display = "none";
+        skipVideo.style.display = "block";
+
+        console.log("الفيديو اشتغل بنجاح");
+    } catch (error) {
+        console.error("خطأ في تشغيل الفيديو:", error);
+    }
 });
 
 // لما الفيديو يخلص
